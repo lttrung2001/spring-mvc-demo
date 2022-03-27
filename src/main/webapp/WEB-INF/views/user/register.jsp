@@ -14,7 +14,7 @@
 	<div class="alert alert-danger" role="alert">${message }</div>
 	<h1>Register Page</h1>
 
-	<form:form action="register.htm" method="post" modelAttribute="user">
+	<form:form action="register.htm" method="post" modelAttribute="user" enctype="multipart/form-data">
 		<div class="mb-3">
 			<label for="username" class="form-label">Username</label> <input
 				name="username" required type="text" class="form-control col-md-6"
@@ -29,6 +29,11 @@
 			<label for="email" class="form-label">Email</label> <input
 				name="email" required type="email" class="form-control col-md-6"
 				id="email">
+		</div>
+		<div class="mb-3">
+			<label for="avatar" class="form-label">Avatar</label> <input
+				name="avatar" required type="file" class="form-control col-md-6"
+				id="avatar">
 		</div>
 		<button type="submit" class="btn btn-primary" name="btnRegister">Register</button>
 	</form:form>

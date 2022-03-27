@@ -58,7 +58,7 @@ body
 }
 div
 {
-	display: block;
+	display: inline-block;
 	position: relative;
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

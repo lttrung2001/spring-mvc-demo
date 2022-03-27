@@ -12,6 +12,7 @@
 <body>
 	<h1>Account List</h1>
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/register.htm">Register</a>
+	<a class="btn btn-danger" href="${pageContext.request.contextPath}/login.htm?lnkLogout">Logout</a>
 	<table class="table">
 		<thead>
 			<tr>

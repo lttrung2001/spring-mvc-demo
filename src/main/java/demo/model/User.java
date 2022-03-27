@@ -11,8 +11,19 @@ public class User extends Object {
 	private String username;
 	private String password;
 	private String email;
+	private String photo;
+	
+
 	private boolean enabled;
 	private String token;
+	
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -21,6 +32,12 @@ public class User extends Object {
 
 	public boolean isEnabled() {
 		return enabled;
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", email=" + email + ", enabled=" + enabled
+				+ ", token=" + token + "]";
 	}
 
 	public void setEnabled(boolean enabled) {

@@ -317,12 +317,11 @@
 
 									<!-- Product Grid -->
 
-									<div class="product-grid">
+									<div id="product-list" class="product-grid">
 
 										<!-- Product -->
-										<div id="product-list">
 										<c:forEach var="item" items="${products }">
-											<div class="product-item">
+											<div class="product-item men">
 												<div class="product product_filter">
 													<div class="product_image">
 														<img src="${item.image }" alt="Product image">
@@ -340,7 +339,6 @@
 												</div>
 											</div>
 										</c:forEach>
-										</div>
 										<!-- Product Sorting -->
 
 										<div
@@ -541,7 +539,8 @@
 				url : "/demo/LoadMoreController",
 				type : "get",
 				success : function(data) {
-					$("#trung").append(data);
+					var row = document.getElementById('product-list');
+					row.innerHTML += data;
 					console.log(data);
 				},
 				error : function(xhr) {
