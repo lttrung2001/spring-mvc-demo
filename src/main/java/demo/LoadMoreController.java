@@ -1,9 +1,17 @@
-package demo.controller;
+package demo;
 
 import java.io.IOException;
 
 
+
+
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,9 +19,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import demo.model.Product;
 
@@ -22,10 +27,10 @@ import demo.model.Product;
  */
 @WebServlet("/LoadMoreController")
 public class LoadMoreController extends HttpServlet {
-	
 	private static final long serialVersionUID = 1L;
 	
 	/**
+	 * @throws ServletException 
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public LoadMoreController() {
@@ -41,13 +46,29 @@ public class LoadMoreController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		DAO dao = new DAO();
-		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.println("<h1>Hello world</h1>");
-		for (Product product : dao.getProducts()) {
-			out.println("<div class=\"product-item\">\r\n"
+		
+		String dbURL = "jdbc:sqlserver://localhost:1433; Database=TestDatabase";
+        String user = "sa";
+        String pass = "tt";
+        List<Product> myList = new ArrayList<Product>();
+        try {
+			Connection conn = DriverManager.getConnection(dbURL, user, pass);
+			String sqlString = "SELECT TOP(4) * FROM products";
+            Statement statement = conn.createStatement();
+            ResultSet list = statement.executeQuery(sqlString);
+            while(list.next()) {
+            	myList.add(new Product(list.getInt(1), list.getString(2), list.getDouble(3), list.getString(4)));
+            }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		for (Product product : myList) {
+			out.println("<div class=\"product-item men\" style='display: inline-block;' >\r\n"
 					+ "												<div class=\"product product_filter\">\r\n"
 					+ "													<div class=\"product_image\">\r\n"
 					+ "														<img src=\"" + product.getImage()
