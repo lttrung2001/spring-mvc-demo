@@ -12,11 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import antlr.Utils;
 import demo.model.Product;
-import net.sf.ehcache.hibernate.HibernateUtil;
+import demo.model.User;
 
 @Transactional
 @Controller	
@@ -30,6 +27,22 @@ public class ProductController {
 		Session session = factory.getCurrentSession();
 		Query query = session.createQuery("from Product").setMaxResults(4);
 		model.addAttribute("products", (List<Product>) query.list());
+		
+		// Test here
+		User user = this.findUser("admin");
+		user.getProducts().forEach(product -> System.out.println(product.toString()));
+		
 		return "product/categories";
+	}
+	
+	@RequestMapping(value = "test")
+	public String test() {
+		return "product/test";
+	}
+	
+	public User findUser(String id) {
+		Query query = factory.getCurrentSession().createQuery(String.format("from User where username = '%s'", id));
+		System.out.println(query.list().get(0).toString());
+		return (User) query.list().get(0);
 	}
 }

@@ -10,5 +10,6 @@
 <a style="text-decoration: none; font-size: 32px;" href="${pageContext.request.contextPath}/login.htm">Go to login page</a>
 <br>
 <a style="text-decoration: none; font-size: 32px;" href="${pageContext.request.contextPath}/register.htm">Go to register page</a>
+<a href="${pageContext.request.contextPath}/TestServlet?id=123">Test verify</a>
 </body>
 </html>

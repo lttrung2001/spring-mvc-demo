@@ -2,11 +2,23 @@ package demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "products")
 public class Product {
+	
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + "]";
@@ -17,6 +29,10 @@ public class Product {
 	private String name;
 	private double price;
 	private String image;
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true)
+	private User user;
+	
 
 	public Product(int id, String name, double price, String image) {
 		super();
@@ -62,5 +78,4 @@ public class Product {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 }

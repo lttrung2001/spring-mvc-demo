@@ -1,21 +1,32 @@
 package demo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
 public class User extends Object {
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", email=" + email + ", photo=" + photo
+				+ ", enabled=" + enabled + ", token=" + token + ", products=" + products + "]";
+	}
+
 	@Id
 	private String username;
 	private String password;
 	private String email;
 	private String photo;
-	
-
 	private boolean enabled;
 	private String token;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Product> products = new HashSet<Product>();
 	
 	public String getPhoto() {
 		return photo;
@@ -34,11 +45,7 @@ public class User extends Object {
 		return enabled;
 	}
 
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", email=" + email + ", enabled=" + enabled
-				+ ", token=" + token + "]";
-	}
+	
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
@@ -81,5 +88,13 @@ public class User extends Object {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+	}
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 }

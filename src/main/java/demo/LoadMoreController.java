@@ -49,6 +49,7 @@ public class LoadMoreController extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
+		
 		String dbURL = "jdbc:sqlserver://localhost:1433; Database=TestDatabase";
         String user = "sa";
         String pass = "tt";
